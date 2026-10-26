@@ -277,7 +277,16 @@
       margin-top: 0.25rem;
       font-size: 0.8125rem;
       color: var(--muted);
+      -webkit-user-select: text;
+      user-select: text;
     }
+
+    .wechat .sheet-head span {
+      font-size: 1.0625rem;
+      color: var(--ink);
+    }
+
+    .wechat .external { display: none; }
 
     .action {
       all: unset;
@@ -318,6 +327,11 @@
       color: var(--muted);
       text-align: center;
       border-top: 1px solid var(--line);
+    }
+
+    .wechat-note {
+      font-size: 0.8125rem;
+      line-height: 1.6;
     }
 
     .sheet-cancel {
@@ -421,30 +435,31 @@
           <span>jzjia7@qq.com</span>
         </div>
 
-        <a class="action" href="mailto:jzjia7@qq.com">
+        <a class="action external" href="mailto:jzjia7@qq.com">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="m4 7.5 8 5.5 8-5.5"/></svg>
           Mail
         </a>
-        <a class="action apple-only" href="sms:jzjia7@qq.com" data-mac-href="imessage:jzjia7@qq.com">
+        <a class="action external" href="sms:jzjia7@qq.com" data-mac-href="imessage:jzjia7@qq.com">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 4.5c-4.97 0-9 3.13-9 7 0 2.1 1.2 3.98 3.08 5.27-.2 1.2-.83 2.27-1.58 3.03 1.86-.07 3.4-.72 4.47-1.55.95.25 1.97.25 3.03.25 4.97 0 9-3.13 9-7s-4.03-7-9-7Z"/></svg>
           iMessage
         </a>
-        <a class="action apple-only" href="facetime:jzjia7@qq.com">
+        <a class="action external" href="facetime:jzjia7@qq.com">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="2.5" y="6.5" width="13" height="11" rx="2.5"/><path d="m15.5 10.5 6-3.5v10l-6-3.5"/></svg>
           FaceTime
           <small>Video</small>
         </a>
-        <a class="action apple-only" href="facetime-audio:jzjia7@qq.com">
+        <a class="action external" href="facetime-audio:jzjia7@qq.com">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M6.6 3.5h2.6l1.4 4.2-2 1.4a12 12 0 0 0 6.3 6.3l1.4-2 4.2 1.4v2.6a2 2 0 0 1-2 2A16.5 16.5 0 0 1 4.6 5.5a2 2 0 0 1 2-2Z"/></svg>
           FaceTime
           <small>Audio</small>
         </a>
         <button class="action" type="button" id="copy">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.5"/><path d="M15.5 8.5V6a2.5 2.5 0 0 0-2.5-2.5H6A2.5 2.5 0 0 0 3.5 6v7A2.5 2.5 0 0 0 6 15.5h2.5"/></svg>
-          Copy address
+          <span id="copy-label">Copy address</span>
         </button>
 
         <p class="sheet-note" id="note" hidden>iMessage and FaceTime require an Apple device.</p>
+        <p class="sheet-note wechat-note" id="wechat-note" lang="zh" hidden>微信内无法直接发邮件、iMessage 或 FaceTime。<br>点右上角 ··· 选择「在浏览器打开」即可使用。</p>
       </div>
 
       <button class="sheet-cancel" type="button" id="cancel">Cancel</button>
@@ -467,13 +482,17 @@
       var ua = navigator.userAgent;
       var isIOS = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
       var isMac = /Macintosh/.test(ua) && !isIOS;
+      var isWeChat = /MicroMessenger/i.test(ua);
 
-      if (isMac) {
+      if (isWeChat) {
+        root.classList.add('wechat');
+        document.getElementById('wechat-note').hidden = false;
+        document.getElementById('copy-label').textContent = '复制邮箱地址';
+      } else if (isMac) {
         document.querySelectorAll('[data-mac-href]').forEach(function (a) {
           a.setAttribute('href', a.getAttribute('data-mac-href'));
         });
-      }
-      if (!isIOS && !isMac) {
+      } else if (!isIOS) {
         document.getElementById('note').hidden = false;
       }
 
@@ -509,11 +528,14 @@
       function fallbackCopy() {
         var t = document.createElement('textarea');
         t.value = EMAIL;
-        t.setAttribute('readonly', '');
         t.style.position = 'fixed';
+        t.style.top = '0';
         t.style.opacity = '0';
+        t.style.fontSize = '16px';
         document.body.appendChild(t);
+        t.focus();
         t.select();
+        t.setSelectionRange(0, EMAIL.length);
         var ok = false;
         try { ok = document.execCommand('copy'); } catch (e) {}
         document.body.removeChild(t);
@@ -521,13 +543,13 @@
       }
 
       document.getElementById('copy').addEventListener('click', function () {
-        var done = function () { close(); showToast('Address copied'); };
+        var done = function () { close(); showToast(isWeChat ? '已复制邮箱地址' : 'Address copied'); };
+        var failed = function () { showToast(isWeChat ? '请长按上方邮箱地址复制' : 'Press and hold the address to copy'); };
+        var fallback = function () { fallbackCopy() ? done() : failed(); };
         if (navigator.clipboard && window.isSecureContext) {
-          navigator.clipboard.writeText(EMAIL).then(done, function () {
-            if (fallbackCopy()) done();
-          });
-        } else if (fallbackCopy()) {
-          done();
+          navigator.clipboard.writeText(EMAIL).then(done, fallback);
+        } else {
+          fallback();
         }
       });
     })();

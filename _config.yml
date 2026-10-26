@@ -1,0 +1,4 @@
+exclude:
+  - README.md
+  - wechat-card/build.py
+  - wechat-card/card.template.html

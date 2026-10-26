@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <style>
+    :root {
+      --bg: #F4F2EE;
+      --ink: #1A1A1A;
+      --muted: #8B8881;
+      --line: rgba(26, 26, 26, 0.12);
+      --sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", "PingFang SC", Helvetica, Arial, sans-serif;
+      --serif: ui-serif, "New York", "Iowan Old Style", "Palatino", Georgia, serif;
+    }
+
+    html, body { margin: 0; }
+
+    body {
+      width: 540px;
+      height: 720px;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .card {
+      box-sizing: border-box;
+      height: 100%;
+      padding: 44px 44px 48px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+    }
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 15px;
+    }
+
+    .mark { font-weight: 600; letter-spacing: -0.01em; }
+
+    .tag {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 17px;
+      color: var(--muted);
+    }
+
+    .name {
+      align-self: end;
+      margin: 0 0 52px;
+      font-weight: 600;
+      font-size: 92px;
+      line-height: 0.92;
+      letter-spacing: -0.045em;
+    }
+
+    .name > span { display: block; }
+    .name .nick { color: var(--muted); font-weight: 500; }
+
+    .bottom {
+      border-top: 1px solid var(--line);
+      padding-top: 28px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 24px;
+    }
+
+    .label {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .url {
+      font-size: 24px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .ways {
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .hint {
+      margin-top: 6px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .qr {
+      width: 140px;
+      height: 140px;
+      padding: 14px;
+      box-sizing: border-box;
+      background: #FFFFFF;
+      border-radius: 10px;
+      color: var(--ink);
+    }
+
+    .qr svg { display: block; width: 100%; height: 100%; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="top">
+      <span class="mark">J.</span>
+      <span class="tag">Student-Athlete</span>
+    </div>
+
+    <h1 class="name">
+      <span>Jeremy</span>
+      <span><span class="nick">“Jez”</span> Jia</span>
+    </h1>
+
+    <div class="bottom">
+      <div>
+        <div class="label">Get in touch</div>
+        <div class="url">jzjia7.github.io</div>
+        <div class="ways">Mail · iMessage · FaceTime</div>
+        <div class="hint">长按识别二维码</div>
+      </div>
+      <div class="qr">{{QR}}</div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Jeremy “Jez” Jia</title>
+  <meta name="description" content="Jeremy “Jez” Jia — Student-Athlete. Reach me by Mail, iMessage or FaceTime at jzjia7@qq.com.">
+  <meta name="theme-color" content="#F4F2EE" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
+  <meta property="og:title" content="Jeremy “Jez” Jia">
+  <meta property="og:description" content="Student-Athlete. Mail · iMessage · FaceTime — jzjia7@qq.com">
+  <meta property="og:type" content="profile">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231A1A1A'/%3E%3Ctext x='32' y='43' font-family='Helvetica,Arial' font-size='30' font-weight='600' fill='%23F4F2EE' text-anchor='middle'%3EJ%3C/text%3E%3C/svg%3E">
+  <style>
+    :root {
+      --bg: #F4F2EE;
+      --ink: #1A1A1A;
+      --muted: #8B8881;
+      --line: rgba(26, 26, 26, 0.12);
+      --surface: #FBFAF8;
+      --surface-press: #ECE9E4;
+      --scrim: rgba(20, 20, 20, 0.28);
+      --sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", "PingFang SC", Helvetica, Arial, sans-serif;
+      --serif: ui-serif, "New York", "Iowan Old Style", "Palatino", Georgia, "Songti SC", serif;
+      --pad: clamp(1.5rem, 6vw, 4rem);
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      color-scheme: light dark;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #121212;
+        --ink: #ECEAE6;
+        --muted: #8E8B85;
+        --line: rgba(236, 234, 230, 0.14);
+        --surface: #1D1D1C;
+        --surface-press: #2A2A28;
+        --scrim: rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html, body { margin: 0; }
+
+    body {
+      min-height: 100vh;
+      min-height: 100svh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .page {
+      min-height: 100vh;
+      min-height: 100svh;
+      max-width: 1120px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      padding:
+        calc(var(--pad) + env(safe-area-inset-top))
+        calc(var(--pad) + env(safe-area-inset-right))
+        calc(var(--pad) + env(safe-area-inset-bottom))
+        calc(var(--pad) + env(safe-area-inset-left));
+    }
+
+    /* Top bar */
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 0.8125rem;
+      letter-spacing: 0.01em;
+      color: var(--muted);
+    }
+
+    .mark {
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+
+    .tag {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.9375rem;
+      color: var(--muted);
+    }
+
+    /* Main */
+    main {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 18vh 0 0;
+    }
+
+    .name {
+      margin: 0;
+      font-weight: 600;
+      font-size: clamp(3.25rem, 17vw, 8.75rem);
+      line-height: 0.92;
+      letter-spacing: -0.045em;
+    }
+
+    .name > span { display: block; }
+
+    .name .nick {
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .contact {
+      margin-top: clamp(2.75rem, 9vh, 5.5rem);
+      border-top: 1px solid var(--line);
+    }
+
+    .contact-btn {
+      all: unset;
+      box-sizing: border-box;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.375rem 0;
+      cursor: pointer;
+    }
+
+    .contact-btn:focus-visible {
+      outline: 2px solid var(--ink);
+      outline-offset: 6px;
+      border-radius: 4px;
+    }
+
+    .contact-label {
+      display: block;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-email {
+      display: block;
+      font-size: clamp(1.375rem, 5.6vw, 2.25rem);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      word-break: break-all;
+    }
+
+    .contact-arrow {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      display: grid;
+      place-items: center;
+      transition: background-color 0.4s var(--ease), color 0.4s var(--ease), transform 0.4s var(--ease), border-color 0.4s var(--ease);
+    }
+
+    .contact-arrow svg { width: 1.125rem; height: 1.125rem; }
+
+    @media (hover: hover) {
+      .contact-btn:hover .contact-arrow {
+        background: var(--ink);
+        border-color: var(--ink);
+        color: var(--bg);
+        transform: rotate(-45deg);
+      }
+    }
+
+    .contact-btn:active .contact-arrow {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: var(--bg);
+    }
+
+    .contact-ways {
+      border-top: 1px solid var(--line);
+      padding-top: 1rem;
+      font-size: 0.8125rem;
+      color: var(--muted);
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-ways i {
+      font-style: normal;
+      opacity: 0.5;
+    }
+
+    footer {
+      padding-top: clamp(2.5rem, 8vh, 4rem);
+      font-size: 0.75rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Entrance */
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: reveal 1s var(--ease) forwards;
+    }
+    .reveal:nth-child(2) { animation-delay: 0.08s; }
+    .reveal:nth-child(3) { animation-delay: 0.16s; }
+    .reveal:nth-child(4) { animation-delay: 0.24s; }
+
+    @keyframes reveal {
+      to { opacity: 1; transform: none; }
+    }
+
+    /* Sheet */
+    .scrim {
+      position: fixed;
+      inset: 0;
+      background: var(--scrim);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s var(--ease);
+      z-index: 10;
+    }
+
+    .sheet {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 11;
+      padding: 0.5rem 0.625rem calc(0.625rem + env(safe-area-inset-bottom));
+      transform: translateY(105%);
+      transition: transform 0.45s var(--ease);
+      visibility: hidden;
+    }
+
+    .open .scrim { opacity: 1; pointer-events: auto; }
+    .open .sheet { transform: none; visibility: visible; }
+
+    .sheet-inner {
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .sheet-group {
+      background: var(--surface);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 1px 0 var(--line), 0 20px 60px rgba(0, 0, 0, 0.12);
+    }
+
+    .sheet-head {
+      padding: 1.125rem 1.25rem 0.875rem;
+      text-align: center;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .sheet-head strong {
+      display: block;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .sheet-head span {
+      display: block;
+      margin-top: 0.25rem;
+      font-size: 0.8125rem;
+      color: var(--muted);
+      -webkit-user-select: text;
+      user-select: text;
+    }
+
+    .wechat .sheet-head span {
+      font-size: 1.0625rem;
+      color: var(--ink);
+    }
+
+    .wechat .external { display: none; }
+
+    .action {
+      all: unset;
+      box-sizing: border-box;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+      padding: 0.9375rem 1.25rem;
+      font-size: 1.0625rem;
+      color: var(--ink);
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .action + .action { border-top: 1px solid var(--line); }
+
+    .action:hover, .action:focus-visible { background: var(--surface-press); }
+    .action:active { background: var(--surface-press); }
+
+    .action svg {
+      width: 1.375rem;
+      height: 1.375rem;
+      flex: none;
+      color: var(--muted);
+    }
+
+    .action small {
+      margin-left: auto;
+      font-size: 0.8125rem;
+      color: var(--muted);
+    }
+
+    .sheet-note {
+      margin: 0;
+      padding: 0.75rem 1.25rem 0.875rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-align: center;
+      border-top: 1px solid var(--line);
+    }
+
+    .wechat-note {
+      font-size: 0.8125rem;
+      line-height: 1.6;
+    }
+
+    .sheet-cancel {
+      all: unset;
+      box-sizing: border-box;
+      display: block;
+      width: 100%;
+      margin-top: 0.5rem;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.0625rem;
+      font-weight: 600;
+      background: var(--surface);
+      border-radius: 18px;
+      cursor: pointer;
+      box-shadow: 0 1px 0 var(--line);
+    }
+
+    .sheet-cancel:active, .sheet-cancel:focus-visible { background: var(--surface-press); }
+
+    @media (min-width: 720px) {
+      .sheet {
+        top: 50%;
+        bottom: auto;
+        padding: 0 1rem;
+        transform: translateY(-46%) scale(0.98);
+        opacity: 0;
+        transition: transform 0.4s var(--ease), opacity 0.3s var(--ease), visibility 0.4s;
+      }
+      .open .sheet { transform: translateY(-50%); opacity: 1; }
+      .sheet-inner { max-width: 380px; }
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: calc(2rem + env(safe-area-inset-bottom));
+      transform: translate(-50%, 10px);
+      padding: 0.625rem 1rem;
+      border-radius: 999px;
+      background: var(--ink);
+      color: var(--bg);
+      font-size: 0.8125rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+      z-index: 20;
+    }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="top reveal">
+      <span class="mark">J.</span>
+      <span class="tag">Student-Athlete</span>
+    </header>
+
+    <main>
+      <h1 class="name reveal">
+        <span>Jeremy</span>
+        <span><span class="nick">“Jez”</span> Jia</span>
+      </h1>
+
+      <div class="contact reveal">
+        <button class="contact-btn" id="open" type="button" aria-haspopup="dialog" aria-controls="sheet">
+          <span>
+            <span class="contact-label">Get in touch</span>
+            <span class="contact-email">jzjia7@qq.com</span>
+          </span>
+          <span class="contact-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </button>
+        <div class="contact-ways" aria-hidden="true">
+          <span>Mail</span><i>·</i><span>iMessage</span><i>·</i><span>FaceTime</span>
+        </div>
+      </div>
+    </main>
+
+    <footer class="reveal">
+      <span>Jeremy Jia</span>
+      <span id="year"></span>
+    </footer>
+  </div>
+
+  <div class="scrim" id="scrim"></div>
+
+  <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+    <div class="sheet-inner">
+      <div class="sheet-group">
+        <div class="sheet-head">
+          <strong id="sheet-title">Contact Jez</strong>
+          <span>jzjia7@qq.com</span>
+        </div>
+
+        <a class="action external" href="mailto:jzjia7@qq.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="m4 7.5 8 5.5 8-5.5"/></svg>
+          Mail
+        </a>
+        <a class="action external" href="sms:jzjia7@qq.com" data-mac-href="imessage:jzjia7@qq.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 4.5c-4.97 0-9 3.13-9 7 0 2.1 1.2 3.98 3.08 5.27-.2 1.2-.83 2.27-1.58 3.03 1.86-.07 3.4-.72 4.47-1.55.95.25 1.97.25 3.03.25 4.97 0 9-3.13 9-7s-4.03-7-9-7Z"/></svg>
+          iMessage
+        </a>
+        <a class="action external" href="facetime:jzjia7@qq.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="2.5" y="6.5" width="13" height="11" rx="2.5"/><path d="m15.5 10.5 6-3.5v10l-6-3.5"/></svg>
+          FaceTime
+          <small>Video</small>
+        </a>
+        <a class="action external" href="facetime-audio:jzjia7@qq.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M6.6 3.5h2.6l1.4 4.2-2 1.4a12 12 0 0 0 6.3 6.3l1.4-2 4.2 1.4v2.6a2 2 0 0 1-2 2A16.5 16.5 0 0 1 4.6 5.5a2 2 0 0 1 2-2Z"/></svg>
+          FaceTime
+          <small>Audio</small>
+        </a>
+        <button class="action" type="button" id="copy">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.5"/><path d="M15.5 8.5V6a2.5 2.5 0 0 0-2.5-2.5H6A2.5 2.5 0 0 0 3.5 6v7A2.5 2.5 0 0 0 6 15.5h2.5"/></svg>
+          <span id="copy-label">Copy address</span>
+        </button>
+
+        <p class="sheet-note" id="note" hidden>iMessage and FaceTime require an Apple device.</p>
+        <p class="sheet-note wechat-note" id="wechat-note" lang="zh" hidden>微信内无法直接发邮件、iMessage 或 FaceTime。<br>点右上角 ··· 选择「在浏览器打开」即可使用。</p>
+      </div>
+
+      <button class="sheet-cancel" type="button" id="cancel">Cancel</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">Copied</div>
+
+  <script>
+    (function () {
+      var EMAIL = 'jzjia7@qq.com';
+      var root = document.documentElement;
+      var openBtn = document.getElementById('open');
+      var sheet = document.getElementById('sheet');
+      var scrim = document.getElementById('scrim');
+      var toast = document.getElementById('toast');
+
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      var ua = navigator.userAgent;
+      var isIOS = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+      var isMac = /Macintosh/.test(ua) && !isIOS;
+      var isWeChat = /MicroMessenger/i.test(ua);
+
+      if (isWeChat) {
+        root.classList.add('wechat');
+        document.getElementById('wechat-note').hidden = false;
+        document.getElementById('copy-label').textContent = '复制邮箱地址';
+      } else if (isMac) {
+        document.querySelectorAll('[data-mac-href]').forEach(function (a) {
+          a.setAttribute('href', a.getAttribute('data-mac-href'));
+        });
+      } else if (!isIOS) {
+        document.getElementById('note').hidden = false;
+      }
+
+      function open() {
+        root.classList.add('open');
+        sheet.querySelector('.action').focus({ preventScroll: true });
+      }
+
+      function close() {
+        root.classList.remove('open');
+        openBtn.focus({ preventScroll: true });
+      }
+
+      openBtn.addEventListener('click', open);
+      scrim.addEventListener('click', close);
+      document.getElementById('cancel').addEventListener('click', close);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && root.classList.contains('open')) close();
+      });
+
+      sheet.querySelectorAll('a.action').forEach(function (a) {
+        a.addEventListener('click', function () { setTimeout(close, 300); });
+      });
+
+      var toastTimer;
+      function showToast(text) {
+        toast.textContent = text;
+        toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 1800);
+      }
+
+      function fallbackCopy() {
+        var t = document.createElement('textarea');
+        t.value = EMAIL;
+        t.style.position = 'fixed';
+        t.style.top = '0';
+        t.style.opacity = '0';
+        t.style.fontSize = '16px';
+        document.body.appendChild(t);
+        t.focus();
+        t.select();
+        t.setSelectionRange(0, EMAIL.length);
+        var ok = false;
+        try { ok = document.execCommand('copy'); } catch (e) {}
+        document.body.removeChild(t);
+        return ok;
+      }
+
+      document.getElementById('copy').addEventListener('click', function () {
+        var done = function () { close(); showToast(isWeChat ? '已复制邮箱地址' : 'Address copied'); };
+        var failed = function () { showToast(isWeChat ? '请长按上方邮箱地址复制' : 'Press and hold the address to copy'); };
+        var fallback = function () { fallbackCopy() ? done() : failed(); };
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(EMAIL).then(done, fallback);
+        } else {
+          fallback();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
