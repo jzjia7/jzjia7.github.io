@@ -121,13 +121,16 @@ h2 {
   color: var(--muted);
 }
 
-.page-writing h2,
-.writing-list h2 {
+.writing-list h3 {
+  margin: 0;
   font-size: 1.35rem;
   letter-spacing: -0.02em;
-  text-transform: none;
-  color: var(--text);
   font-weight: 600;
+}
+
+.section-lead {
+  margin: -0.5rem 0 1.25rem;
+  color: var(--muted);
 }
 
 .contact-list,
@@ -187,22 +190,10 @@ time {
   color: var(--muted);
 }
 
-.page-writing {
-  background: var(--soft);
-}
-
-.page-writing .nav {
-  background: rgba(245, 245, 247, 0.86);
-}
-
 footer {
   max-width: var(--max);
   margin: 0 auto;
   padding: 0 1.5rem 3rem;
   color: var(--muted);
   font-size: 0.78rem;
-}
-
-.page-writing footer {
-  padding-top: 0;
 }
